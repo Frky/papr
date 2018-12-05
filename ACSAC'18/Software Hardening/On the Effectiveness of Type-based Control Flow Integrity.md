@@ -18,14 +18,15 @@ Memory corruption can lead to a violation of the CFG.
 * RTC generates the CFG based on Type Signature
 * RTC matches the type signature of each indirect control flow transfer with its target
 * Forward edge
-    * type of cuntion pointer and the tarfet are checked at each control transfer
-    * Backward edges
-        * type oif the callee is checked during funciton epilogue
+    * type of function pointer and the target are checked at each control transfer
+* Backward edges
+    * type of the callee is checked during function epilogue
 
 ## Reuse Attack Protector
 
 Released in 2016, updated in 2017. 
-Generates a hash of the function signature. Pb:: type collision.
+
+Generates a hash of the function signature. Pb: type collision.
 
 ## Research questions
 
@@ -34,9 +35,9 @@ Generates a hash of the function signature. Pb:: type collision.
 
 ### Threat model
 
-* attacker has arbitrary reand and write primitives to the memory
+* attacker has arbitrary read and write primitives to the memory
 * application contains one string or multiple limited memory corruption vulns.
-* DEP and ASLR are enables
+* DEP and ASLR are enabled
 * RAP is in place
 
 ## Typed ROP (TROP)
@@ -52,7 +53,7 @@ Generates a hash of the function signature. Pb:: type collision.
 * Building CFG, CG
 * Finding gadgets
 * Detecting candidate paths
-* Constraing solving
+* Constraint solving
 
 => **exploits**
 
@@ -68,7 +69,7 @@ Generates a hash of the function signature. Pb:: type collision.
 
 ## Conclusion
 
-* evaluated RTC from security and practically perspectives
+* evaluated RTC from security and practical perspectives
 * type collision are rare
 * TROP showed collisions with other functions in a nested fashion can be exploited
 * gadgets for mounting TROP ...
