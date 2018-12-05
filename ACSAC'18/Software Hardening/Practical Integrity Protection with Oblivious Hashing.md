@@ -22,31 +22,31 @@ float computeUsage(float *kwMinute, int size, enum period rate) {
 }
 ```
 
-### Obvious hashing
+### Obvious Hashing (OH)
 
 *Verify integrity of a program by hashing execution traces*
+
 => i.e., hashing memory variables that are modified during the execution of a function. At the end of the 
 function execution, check hash (compliant with a possible execution trace of the function?). 
 
 ### Input dependent instructions
 
-Compure input dependent instructions using method proposed by Scholz et al.
+Compute input dependent instructions using method proposed by Scholz et al.
 * data dependent insutrcitons (DDI) - at least one of its operands depends on input data
 * Control flow dependent instructions (CFDI) - ...
 * ....
 
-### is not practical
+### OH is not practical
 
 * incapable of protecting input-dependent parts
 * manual segregation of instructions
 * performance bounds and security garantees of OH
 
-### Contributions: practical OH
+## Contributions: practical OH (SROH)
+
 * extend OH to protect data independent instructions (SROH)
 * compute input dependent instructions from literature
 * protect data-dependent ...
-
-## Short-range OH
 
 ### Idea
 
