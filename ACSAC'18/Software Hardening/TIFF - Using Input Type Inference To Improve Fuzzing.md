@@ -8,48 +8,51 @@
 Current fuzzers are good for coverage, but find bugs by accident
 
 New fuzzing mutation strategy:
-    * distinguishes between code-oriented and bug-oriented mutation
-    * learns input offset types which helps mutation
+* distinguishes between code-oriented and bug-oriented mutation
+* learns input offset types which helps mutation
 
 ### Fuzzing
 
-Fuzzer -- (random input) --> System under test --> Output
+```
+[Fuzzer] --(random input)--> [System under test] --> [Output]
+```
 
 Hope: exceptional behavior
+
 Mutation (evolutionary fuzzing) focuses on code coverage!
 
 ### Motivation: a simple file format
 
 ```
-ÒK | V0.1 04.12.18 "Herbert\n" \ffDD 0010 0010 AAAAAA..AA
+[ ÒK | V0.1 | 04.12.18 | "Herbert\n" | \ffDD | 0010 | 0010 | AAAAAA..AA | ... ]
 ```
 
-* magic
-* optinoal data
-* name string
-* data srtructure to keep data
+* magic `OK`
+* optional data `V0.1 | 04.12.18`
+* name string `Herbert\n`
+* data srtructure to keep data `\ffDD | 0010 | 0010 | AAAAAA..AA`
 
 Fuzzing:
-* Magic bytes: "OK" -- must be fixed by the fuzzer
+* Magic bytes: must be fixed by the fuzzer
 * Optional data: application may ignore these bytes, but fuzzer wastes time on mutating them
-* Name string followed by a new line (eg Artist name) : the fuzzer has to produce enough... > super hard by random mutaiton
+* Name string followed by a new line (eg Artist name): the fuzzer has to produce enough... > super hard by random mutation
 * Data structure to keep data: marker -> height -> width -> data: trigger an integer overflow is hard with random mutation
 
 ### Problems summarized
 
 * Unaware of types
-mutated values are not appropriate 
-* Unaware whether offset is even processed by the applicatino
-waste of mutation time
-Unaware of what and where to mutate
+   * mutated values are not appropriate 
+* Unaware wether offset is even processed by the application
+   * waste of mutation time
+* Unaware of what and where to mutate
 
-> traditional byte-by-byte mutation is not a very effective strategy!
+=> traditional byte-by-byte mutation is not a very effective strategy!
 
 ## TIFF
 
 New mutation strategy
     * input type inference
-Two aspects of coverrage
+Two aspects of coverage
     * code coverage oriented
     * bug oriented
 
@@ -65,7 +68,7 @@ Based on how the input is used by the application (Howards, etc.) + taint analys
     * focus on tainted bytes used in CMP instructions
     * mutate considering associated type
 * Bug oriented: 
-    * mutate with extreme values w.r.t. the assoiated type
+    * mutate with extreme values w.r.t. the associated type
 
 ### TIFF cycling
 
